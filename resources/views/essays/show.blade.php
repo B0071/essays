@@ -8,6 +8,6 @@
             <p>By {{ $essay->user->name }}</p>
             <p>Date: {{ $essay->created_at->format('d.m.Y') }}</p>
         </div>
-        <p>{{ $essay->body }}</p>
+        <p>{!! $essay->body !!}</p>
     </div>
 </x-layout>

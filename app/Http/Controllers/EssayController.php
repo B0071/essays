@@ -4,20 +4,39 @@ namespace App\Http\Controllers;
 
 use App\Models\Essay;
 use Illuminate\Http\Request;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class EssayController extends Controller
 {
     public function index(){
-        $essays = Essay::all();
+        $essays = Essay::latest()->get();
 
-        return view('index', [
+        return view('essays.index', [
             'essays' => $essays
         ]);
     }
 
     public function show(Essay $essay){
-        return view('essay', [
+        return view('essays.show', [
             'essay' => $essay
         ]);
+    }
+
+    public function create(){
+        return view('essays.create');
+    }
+
+    public function store(Request $request){
+        $attributes = $request->validate([
+            'title' => ['required', 'min:10'],
+            'body' => ['required', 'min:50']
+        ]);
+
+        // $essay = Essay::create($attributes);
+
+        $essay = Auth::user()->essays()->create($attributes);
+
+        return redirect("/essays/" . $essay->id);
     }
 }

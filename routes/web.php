@@ -9,7 +9,13 @@ use Illuminate\Support\Facades\Route;
 //     return view('index');
 // });
 
-Route::get('/', [EssayController::class, 'index']);
+Route::get('/', function(){
+    return view('index');
+});
+
+Route::get('/essays', [EssayController::class, 'index']);
+Route::get('/essays/create', [EssayController::class, 'create']);
+Route::post('/essays', [EssayController::class, 'store']);
 Route::get('/essays/{essay}', [EssayController::class, 'show']);
 
 Route::middleware('guest')->group(function(){

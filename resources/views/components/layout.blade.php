@@ -6,6 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
 </head>
 <body>
 <nav class="relative bg-gray-800">
@@ -31,9 +33,13 @@
         <div class="hidden sm:ml-6 sm:block">
           <div class="flex space-x-4">
             <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-white/5 hover:text-white" -->
-            <a href="/" aria-current="page" class="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white">Essays</a>
-            <a href="#" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">About</a>
-            <a href="#" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Contact</a>
+            <a href="/"  class="{{ request()->is('/') ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-white/5 hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium">Home</a>
+            <a href="/essays" class="{{ request()->is('essays') ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-white/5 hover:text-white' }} rounded-md px-3 py-2 text-sm font-medium">Essays</a>
+            
+            @auth
+              <a href="/my-essays" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">My Essays</a>
+              <a href="/drafts" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Drafts</a>
+            @endauth
           </div>
         </div>
       </div>
@@ -47,7 +53,7 @@
 
       @auth
         <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-          <a href="#" class="rounded-md px-3 py-2 mx-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-blue-500">New Essay</a>
+          <a href="/essays/create" class="rounded-md px-3 py-2 mx-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-blue-500">New Essay</a>
           <form method="POST" action="/logout" class="text-gray-300 hover:text-red-500 font-medium text-sm">
             @csrf
             @method('DELETE')

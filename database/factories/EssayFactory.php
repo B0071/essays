@@ -19,7 +19,7 @@ class EssayFactory extends Factory
     {
         return [
             'title' => fake()->realTextBetween(15, 30),
-            'body' => fake()->realTextBetween(250, 500),
+            'body' => fake()->realTextBetween(1000, 2000),
             'user_id' => User::factory()
         ];
     }
