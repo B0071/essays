@@ -12,3 +12,4 @@ Route::get('/', [EssayController::class, 'index']);
 Route::get('/essays/{essay}', [EssayController::class, 'show']);
 
 Route::get('/register', [RegisteredUserController::class, 'create']);
+Route::post('/register', [RegisteredUserController::class, 'store']);
