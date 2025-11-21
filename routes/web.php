@@ -17,7 +17,7 @@ Route::get('/essays', [EssayController::class, 'index']);
 Route::get('/essays/create', [EssayController::class, 'create']);
 Route::post('/essays', [EssayController::class, 'store']);
 Route::get('/essays/{essay}', [EssayController::class, 'show']);
-Route::get('/essays/{essay}/edit', [EssayController::class, 'edit']);
+Route::get('/essays/{essay}/edit', [EssayController::class, 'edit'])->can('edit-essay', 'essay');
 Route::put('/essays/{essay}', [EssayController::class, 'update']);
 
 Route::middleware('guest')->group(function(){
