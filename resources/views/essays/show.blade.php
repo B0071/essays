@@ -1,7 +1,17 @@
 @props(['essay'])
 
 <x-layout>
-    <a href="/" class="hover:underline text-sm font-bold hover:text-blue-500">Go Back</a>
+    <div class="flex justify-between items-center">
+        <a href="/" class="hover:underline text-sm font-bold hover:text-blue-500">Go Back</a>
+        <div class="flex gap-x-4 items-center">
+        <a href="/essays/{{ $essay->id; }}/edit" class="hover:underline text-sm font-bold text-yellow-500">Edit</a>
+        <form method="POST" action="/essays/{{ $essay->id; }}">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="hover:underline text-sm font-bold text-red-500">Delete</button>
+        </form>
+        </div>
+    </div>
     <div>
         <h3 class="text-2xl font-bold text-center mb-6">{{ $essay->title }}</h3>
         <div class="text-sm text-gray-500 flex justify-between mb-2 italic">

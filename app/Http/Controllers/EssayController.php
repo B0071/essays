@@ -33,10 +33,26 @@ class EssayController extends Controller
             'body' => ['required', 'min:50']
         ]);
 
-        // $essay = Essay::create($attributes);
-
         $essay = Auth::user()->essays()->create($attributes);
 
         return redirect("/essays/" . $essay->id);
+    }
+
+    public function edit(Essay $essay){
+        
+        return view('essays.edit', [
+            'essay' => $essay
+        ]);
+    }
+
+    public function update(Request $request, Essay $essay){
+        
+        $essay->update([
+            'title' => $request->title,
+            'body' => $request->body
+        ]);
+
+        return redirect('/essays/' . $essay->id);
+
     }
 }

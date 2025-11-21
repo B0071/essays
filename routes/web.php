@@ -17,6 +17,8 @@ Route::get('/essays', [EssayController::class, 'index']);
 Route::get('/essays/create', [EssayController::class, 'create']);
 Route::post('/essays', [EssayController::class, 'store']);
 Route::get('/essays/{essay}', [EssayController::class, 'show']);
+Route::get('/essays/{essay}/edit', [EssayController::class, 'edit']);
+Route::put('/essays/{essay}', [EssayController::class, 'update']);
 
 Route::middleware('guest')->group(function(){
     Route::get('/register', [RegisteredUserController::class, 'create']);
