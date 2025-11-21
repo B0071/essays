@@ -20,7 +20,9 @@
     <div>
         <h3 class="text-2xl font-bold text-center mb-6">{{ $essay->title }}</h3>
         <div class="text-sm text-gray-500 flex justify-between mb-2 italic">
-            <p>By {{ $essay->user->name }}</p>
+            <a href="/users/{{ $essay->user->id; }}/essays" class="text-blue-500 hover:underline">
+                <p>By {{ $essay->user->name }}</p>
+            </a>
             <p>Date: {{ $essay->created_at->format('d.m.Y') }}</p>
         </div>
         <p>{!! $essay->body !!}</p>

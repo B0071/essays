@@ -33,3 +33,5 @@ Route::delete('/logout', [SessionController::class, 'destroy'])->middleware('aut
 
 Route::get('/results', SearchController::class);
 Route::get('/users/{user}/essays', [UserController::class, 'getEssays']);
+
+Route::get('/my-essays', [UserController::class, 'ownEssays']);
