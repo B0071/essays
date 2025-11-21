@@ -55,4 +55,12 @@ class EssayController extends Controller
         return redirect('/essays/' . $essay->id);
 
     }
+
+    public function destroy(Essay $essay){
+        if(Auth::user()->is($essay->user)){
+            $essay->delete();
+        }
+
+        return redirect('/essays');
+    }
 }
