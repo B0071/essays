@@ -5,6 +5,7 @@ use App\Http\Controllers\RegisteredUserController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\UserController;
+use App\Services\TelegramService;
 use Illuminate\Support\Facades\Route;
 
 // Route::get('/', function () {
@@ -35,3 +36,5 @@ Route::get('/results', SearchController::class);
 Route::get('/users/{user}/essays', [UserController::class, 'getEssays']);
 
 Route::get('/my-essays', [UserController::class, 'ownEssays']);
+
+Route::get('/tg', [TelegramService::class, 'sendMsg']);

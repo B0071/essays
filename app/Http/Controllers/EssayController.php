@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Essay;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Services\TelegramService;
 use Illuminate\Support\Facades\Auth;
 
 class EssayController extends Controller
@@ -34,6 +35,9 @@ class EssayController extends Controller
         ]);
 
         $essay = Auth::user()->essays()->create($attributes);
+        $essayUrl = env('APP_URL') . "/essays/" . $essay->id;
+
+        (new TelegramService())->sendMsg($essay->title, $essayUrl);
 
         return redirect("/essays/" . $essay->id);
     }
